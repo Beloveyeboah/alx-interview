@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
-"""interview
+"""
+ a script that reads stdin line by line and computes metrics
 """
 
 
@@ -39,7 +40,6 @@ def signal_handler(sig, frame):
     """
     print_metrics()
     sys.exit(0)
-
 
 # Register the signal handler for keyboard interruption
 signal.signal(signal.SIGINT, signal_handler)
