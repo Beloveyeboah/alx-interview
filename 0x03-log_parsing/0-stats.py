@@ -1,13 +1,11 @@
 #!/usr/bin/python3
 
 """
- a script that reads stdin line by line and computes metrics
+interview
 """
-
 
 import sys
 import signal
-
 
 # Initialize metrics
 total_size = 0
@@ -41,11 +39,9 @@ def signal_handler(sig, frame):
     print_metrics()
     sys.exit(0)
 
+
 # Register the signal handler for keyboard interruption
-
-
 signal.signal(signal.SIGINT, signal_handler)
-
 
 for line in sys.stdin:
     try:
@@ -57,16 +53,21 @@ for line in sys.stdin:
         status_code = parts[-2]
         file_size = parts[-1]
 
+        try:
+            file_size = int(file_size)
+        except ValueError:
+            continue
+
         # Validate and update metrics
         if status_code in status_codes_count:
             status_codes_count[status_code] += 1
-        total_size += int(file_size)
+        total_size += file_size
         line_count += 1
 
         # Print metrics every 10 lines
         if line_count % 10 == 0:
             print_metrics()
-    except Exception:
+    except Exception as e:
         continue
 
 # Print final metrics
