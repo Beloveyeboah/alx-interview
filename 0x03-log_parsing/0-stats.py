@@ -42,7 +42,10 @@ def signal_handler(sig, frame):
     sys.exit(0)
 
 # Register the signal handler for keyboard interruption
+
+
 signal.signal(signal.SIGINT, signal_handler)
+
 
 for line in sys.stdin:
     try:
