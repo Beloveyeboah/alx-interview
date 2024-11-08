@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """
 N Queens Puzzle Solver
 """
@@ -7,13 +7,13 @@ import sys
 
 
 def print_usage_and_exit():
-    """ Print usage and exit with status 1 """
+    """Print usage message and exit with status 1"""
     print("Usage: nqueens N")
     sys.exit(1)
 
 
 def is_integer(value):
-    """ Check if value is an integer """
+    """Check if the value is an integer"""
     try:
         int(value)
         return True
@@ -22,7 +22,7 @@ def is_integer(value):
 
 
 def is_valid(board, row, col):
-    """ Check if placing a queen at (row, col) is valid """
+    """Check if placing a queen at (row, col) is valid"""
     for i in range(row):
         if board[i] == col or \
            board[i] - i == col - row or \
@@ -32,7 +32,7 @@ def is_valid(board, row, col):
 
 
 def solve_nqueens(N):
-    """ Solve the N queens problem and print all solutions """
+    """Solve the N Queens problem and print all solutions"""
     def backtrack(row):
         if row == N:
             solutions.append(board[:])
