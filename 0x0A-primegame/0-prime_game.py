@@ -1,40 +1,29 @@
 #!/usr/bin/python3
-"""
-prime games
-"""
-
+""" Module for solving prime game question """
 
 def isWinner(x, nums):
-    def is_prime(n):
-        if n <= 1:
-            return False
-        for i in range(2, int(n**0.5) + 1):
-            if n % i == 0:
-                return False
-        return True
-
-    def count_primes(n):
-        count = 0
-        for i in range(2, n + 1):
-            if is_prime(i):
-                count += 1
-        return count
-
-    if not nums or x <= 0:
+    """function that checks for the winner"""
+    if not nums or x < 1:
         return None
+    max_num = max(nums)
 
-    maria_wins = 0
-    ben_wins = 0
-
-    for n in nums:
-        if count_primes(n) % 2 == 0:
-            ben_wins += 1
-        else:
-            maria_wins += 1
-
-    if maria_wins > ben_wins:
+    my_filter = [True for _ in range(max(max_num + 1, 2))]
+    for i in range(2, int(pow(max_num, 0.5)) + 1):
+        if not my_filter[i]:
+            continue
+        for j in range(i * i, max_num + 1, i):
+            my_filter[j] = False
+    my_filter[0] = my_filter[1] = False
+    y = 0
+    for i in range(len(my_filter)):
+        if my_filter[i]:
+            y += 1
+        my_filter[i] = y
+    player1 = 0
+    for x in nums:
+        player1 += my_filter[x] % 2 == 1
+    if player1 * 2 == len(nums):
+        return None
+    if player1 * 2 > len(nums):
         return "Maria"
-    elif ben_wins > maria_wins:
-        return "Ben"
-    else:
-        return None
+    return "Ben"
